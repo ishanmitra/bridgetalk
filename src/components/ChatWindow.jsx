@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import MessageBubble from "./MessageBubble.jsx";
 
 const ChatWindow = ({ role, messages, setMessages }) => {
   const [input, setInput] = useState("");
-
+  const chatEndRef = useRef(null);
+  
   const sendMessage = () => {
     if (!input.trim()) return;
     const newMsg = { role, text: input };
     setMessages([...messages, newMsg]);
     setInput("");
   };
+
+  // Scroll to the bottom whenever messages change
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   // Handle Enter key press to send the message
   const handleKeyDown = (e) => {
@@ -24,6 +30,7 @@ const ChatWindow = ({ role, messages, setMessages }) => {
         {messages.map((msg, idx) => (
           <MessageBubble key={idx} role={msg.role} text={msg.text} />
         ))}
+        <div ref={chatEndRef} />
       </div>
 
       {role === "B" && (
