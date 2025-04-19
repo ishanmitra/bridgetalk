@@ -52,8 +52,11 @@ const LLM = ({ roomId }) => {
               console.log(input)
 
               puter.ai.chat(input).then((res) => {
-                console.log("LLM response:", res.message.content);
+                // console.log("LLM response:", res.message.content);
                 socket.emit("chat-message", { roomId, message: { role: "AI", text: res.message.content }})
+                puter.ai.txt2speech(res.message.content).then((audio)=>{
+                  audio.play();
+                });
               });
 
               // const res = await puter.ai.chat(input);
