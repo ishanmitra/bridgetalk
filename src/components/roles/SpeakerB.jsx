@@ -7,14 +7,14 @@ const SpeakerB = ({ roomId }) => {
 
   useEffect(() => {
     const pc = new RTCPeerConnection({
-    iceServers: [
+      iceServers: [
         { urls: "stun:stun.l.google.com:19302" },
         {
-            urls: "turn:openrelay.metered.ca:80",
-            username: "openrelayproject",
-            credential: "openrelayproject"
+          urls: "turn:openrelay.metered.ca:80",
+          username: "openrelayproject",
+          credential: "openrelayproject"
         }
-    ]
+      ]
     });
 
     peerConnection.current = pc;
@@ -23,17 +23,19 @@ const SpeakerB = ({ roomId }) => {
       const [stream] = event.streams;
       console.log("Speaker B: Received remote stream");
       audioRef.current.srcObject = stream;
-      audioRef.current.play().catch(e => console.error("Autoplay error:", e));
+      audioRef.current.play().catch((e) =>
+        console.error("Autoplay error:", e)
+      );
     };
 
-    pc.onicecandidate = event => {
+    pc.onicecandidate = (event) => {
       if (event.candidate) {
         socket.emit("ice-candidate", { candidate: event.candidate, roomId });
       }
     };
 
     socket.on("offer", async ({ offer }) => {
-    console.log("Speaker B: Got offer");
+      console.log("Speaker B: Got offer");
       await pc.setRemoteDescription(new RTCSessionDescription(offer));
       const answer = await pc.createAnswer();
       await pc.setLocalDescription(answer);

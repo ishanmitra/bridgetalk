@@ -3,6 +3,7 @@ import MessageBubble from "./MessageBubble.jsx";
 import socket from "../lib/socket.js";
 import SpeakerA from "./roles/SpeakerA.jsx";
 import SpeakerB from "./roles/SpeakerB.jsx";
+import LLM from "./roles/LLM.jsx"; // Adjust path as needed
 
 const ChatWindow = ({
   role,
@@ -70,7 +71,7 @@ const ChatWindow = ({
 
   return (
     <div className="max-w-xl mx-auto bg-white rounded-2xl shadow p-4">
-      <div className="h-96 overflow-y-auto space-y-2 border p-2 mb-4 rounded-lg">
+      <div id="chat-history" className="h-96 overflow-y-auto space-y-2 border p-2 mb-4 rounded-lg">
         {messages.map((msg, idx) => (
           <MessageBubble key={idx} role={msg.role} text={msg.text} />
         ))}
@@ -113,6 +114,8 @@ const ChatWindow = ({
           </div>
         </>
       )}
+
+      <LLM />
     </div>
   );
 };
