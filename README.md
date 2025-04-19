@@ -1,9 +1,12 @@
 # BridgeTalk 🧠🔊💬
 
-**BridgeTalk bridges speech-impaired people over voice calls quickly.**  
-It enables real-time voice + text communication between two parties:
-- **Speaker A** (voice user): Talks through a mic and listens.
-- **Speaker B** (speech-impaired user): Types prompts that are expanded and spoken aloud by the app.
+**BridgeTalk empowers speech-impaired individuals to participate in natural phone conversations quickly, clearly, and confidently.**
+
+Spoken conversations are often faster, more expressive, and socially preferred, but for people with speech impairments, traditional phone calls can be a barrier. BridgeTalk solves this by letting users *type what they want to say*, and *have it spoken aloud in real time* during a voice call. It bridges two parties:
+- **Speaker A** (voice user): Talks and listens as in a normal call.
+- **Speaker B** (speech-impaired user): Types messages that are instantly expanded and *spoken aloud* by the app.
+
+By combining real-time chat, speech synthesis, and WebRTC audio streaming, BridgeTalk provides a **fluid, inclusive experience** where both sides feel like they're truly talking.
 
 ### 🧩 Features
 - ⚡ Real-time chat system using Socket.IO with role-based interaction.
