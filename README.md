@@ -88,9 +88,9 @@ Fork the repository in GitHub and do the following:
 
 1. The server still cannot relay audio to another device. It can currently only relay from Speaker A to Speaker B on the same device.
    Text transmission works properly across devices.
-2. For Speaker A's voice to be transmitted, following the given steps ensures that the audio is transmitted:
-a) Open one window, and first Join as Speaker B (Text)
-b) Open another window, and Join as Speaker A (Voice)
-c) Speaker B fails to accept the livestream
-d) Refresh the second window, and select the Join as Speaker again.
-e) This time it will succcessfully transmit audio.
+2. For Speaker A's voice to be transmitted, following the given steps ensures that the audio is transmitted:  
+a) Open one window, and first Join as Speaker B (Text)  
+b) Open another window, and Join as Speaker A (Voice)  
+c) Speaker B fails to accept the livestream  
+d) Refresh the second window, and select the Join as Speaker again.  
+e) This time it will succcessfully transmit audio.  
