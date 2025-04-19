@@ -31,7 +31,7 @@ IMPORTANT:
 Your response:
 `;
 
-const LLM = () => {
+const LLM = ({ roomId }) => {
   useEffect(() => {
     const chatContainer = document.getElementById("chat-history");
 
@@ -53,6 +53,7 @@ const LLM = () => {
 
               puter.ai.chat(input).then((res) => {
                 console.log("LLM response:", res.message.content);
+                socket.emit("chat-message", { roomId, message: { role: "AI", text: res.message.content }})
               });
 
               // const res = await puter.ai.chat(input);

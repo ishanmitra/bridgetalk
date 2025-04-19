@@ -103,6 +103,7 @@ const ChatWindow = ({
               Send
             </button>
           </div>
+          <LLM roomId={roomId} />
         </>
       )}
 
@@ -115,7 +116,6 @@ const ChatWindow = ({
         </>
       )}
 
-      <LLM />
     </div>
   );
 };
