@@ -11,6 +11,13 @@ const ChatWindow = ({ role, messages, setMessages }) => {
     setInput("");
   };
 
+  // Handle Enter key press to send the message
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  };
+
   return (
     <div className="max-w-xl mx-auto bg-white rounded-2xl shadow p-4">
       <div className="h-96 overflow-y-auto space-y-2 border p-2 mb-4 rounded-lg">
@@ -25,6 +32,7 @@ const ChatWindow = ({ role, messages, setMessages }) => {
             className="flex-1 border rounded-lg p-2"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="Type your prompt..."
           />
           <button onClick={sendMessage} className="bg-green-500 text-white px-4 rounded-lg">
