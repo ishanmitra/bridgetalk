@@ -1,14 +1,29 @@
 import { useState, useEffect, useRef } from "react";
 import MessageBubble from "./MessageBubble.jsx";
+import socket from "../lib/socket.js";
 
-const ChatWindow = ({ role, messages, setMessages }) => {
+const ChatWindow = ({ role, messages, setMessages, roomId }) => {
   const [input, setInput] = useState("");
   const chatEndRef = useRef(null);
-  
+
+  // Socket emit receive messages
+  useEffect(() => {
+    socket.emit("join-room", roomId);
+
+    socket.on("chat-message", (msg) => {
+      setMessages((prev) => [...prev, msg]);
+    });
+
+    return () => {
+      socket.off("chat-message");
+    };
+  }, [roomId, setMessages]);
+
   const sendMessage = () => {
     if (!input.trim()) return;
     const newMsg = { role, text: input };
-    setMessages([...messages, newMsg]);
+    setMessages((prev) => [...prev, newMsg]);
+    socket.emit("chat-message", { roomId, message: newMsg });
     setInput("");
   };
 
