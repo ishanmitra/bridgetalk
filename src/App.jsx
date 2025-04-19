@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
-      <h1 className="text-2xl font-bold text-center mb-4">Hybrid Talk Interface</h1>
+      <h1 className="text-2xl font-bold text-center mb-4">BridgeTalk</h1>
       {!role ? (
         <RoleSelector onSelect={setRole} />
       ) : (
