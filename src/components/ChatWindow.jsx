@@ -7,6 +7,7 @@ import LLM from "./roles/LLM.jsx"; // Adjust path as needed
 
 const ChatWindow = ({
   role,
+  setRole,
   messages,
   setMessages,
   roomId,
@@ -70,7 +71,15 @@ const ChatWindow = ({
   }, [messages, interimMessage]);
 
   return (
-    <div className="max-w-xl mx-auto bg-white rounded-2xl shadow p-4">
+    <div className="mx-auto bg-white rounded-2xl shadow p-4">
+      <button
+        onClick={() => setRole(null)}
+        className="mb-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+      >
+        Back to Home
+      </button>
+
+
       <div id="chat-history" className="h-96 overflow-y-auto space-y-2 border p-2 mb-4 rounded-lg">
         {messages.map((msg, idx) => (
           <MessageBubble key={idx} role={msg.role} text={msg.text} />
@@ -99,7 +108,7 @@ const ChatWindow = ({
               onKeyDown={handleKeyDown}
               placeholder="Type your prompt..."
             />
-            <button onClick={sendMessage} className="bg-green-500 text-white px-4 rounded-lg">
+            <button onClick={sendMessage} className="text-white inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600">
               Send
             </button>
           </div>

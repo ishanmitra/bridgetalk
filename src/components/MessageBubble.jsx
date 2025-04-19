@@ -1,9 +1,22 @@
+import { useEffect, useState } from "react";
+
 const MessageBubble = ({ role, text, isInterim = false }) => {
+  const [visible, setVisible] = useState(false);
+
   const isA = role === "A";
   const isB = role === "B";
   const isAI = role === "AI";
 
-  const baseStyle = `max-w-xs px-4 py-2 rounded-xl shadow`;
+  useEffect(() => {
+    // Trigger transition after mount
+    const timer = setTimeout(() => setVisible(true), 10);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const baseStyle = `max-w-xs px-4 py-2 rounded-xl shadow transform transition-all duration-300 ${
+    visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+  }`;
+
   const roleStyle = isA
     ? "bg-blue-100 text-blue-800"
     : isB
@@ -38,6 +51,5 @@ const MessageBubble = ({ role, text, isInterim = false }) => {
     </div>
   );
 };
-
 
 export default MessageBubble;
