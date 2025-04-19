@@ -5,6 +5,7 @@ import ChatWindow from "./components/ChatWindow.jsx";
 function App() {
   const [role, setRole] = useState(null); // 'A' or 'B'
   const [messages, setMessages] = useState([]);
+  const [interimMessage, setInterimMessage] = useState("");
   const [roomId] = useState("room123"); // or generate dynamically
 
   return (
@@ -13,7 +14,14 @@ function App() {
       {!role ? (
         <RoleSelector onSelect={setRole} />
       ) : (
-        <ChatWindow role={role} messages={messages} setMessages={setMessages} roomId={roomId} />
+        <ChatWindow
+          role={role}
+          messages={messages}
+          setMessages={setMessages}
+          interimMessage={interimMessage}
+          setInterimMessage={setInterimMessage}
+          roomId={roomId}
+        />
       )}
     </div>
   );
