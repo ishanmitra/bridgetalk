@@ -14,6 +14,32 @@ const SpeakerA = ({ roomId, setInterimMessage }) => {
   }
 
   useEffect(() => {
+    const chatContainer = document.getElementById("chat-history");
+
+    if (!chatContainer) return;
+
+    const observer = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === "childList") {
+          mutation.addedNodes.forEach(async (node) => {
+            if (
+              node.nodeType === Node.ELEMENT_NODE &&
+              node.innerText.startsWith("AI:")
+            ) {
+              const ai_text = node.innerText.slice(4).trim();
+
+              puter.ai.txt2speech(ai_text).then((audio)=>{
+                audio.play();
+              });
+
+            }
+          });
+        }
+      }
+    });
+
+    observer.observe(chatContainer, { childList: true, subtree: true });
+
     const start = async () => {
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: {
@@ -125,6 +151,7 @@ const SpeakerA = ({ roomId, setInterimMessage }) => {
 
     return () => {
       peerConnection.current?.close();
+      observer.disconnect();
     };
   }, [roomId, setInterimMessage]);
 

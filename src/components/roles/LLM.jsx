@@ -54,19 +54,10 @@ const LLM = ({ roomId }) => {
               puter.ai.chat(input).then((res) => {
                 // console.log("LLM response:", res.message.content);
                 socket.emit("chat-message", { roomId, message: { role: "AI", text: res.message.content }})
-                puter.ai.txt2speech(res.message.content).then((audio)=>{
-                  audio.play();
-                });
+                // puter.ai.txt2speech(res.message.content).then((audio)=>{
+                //   audio.play();
+                // });
               });
-
-              // const res = await puter.ai.chat(input);
-              // const aiReply = `AI: ${res.message.content}`;
-
-              // Create and append the AI message
-              // const aiMessage = document.createElement("div");
-              // aiMessage.className = "message ai"; // Style this accordingly
-              // aiMessage.innerText = aiReply;
-              // chatContainer.appendChild(aiMessage);
             }
           });
         }
